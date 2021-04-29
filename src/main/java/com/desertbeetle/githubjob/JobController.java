@@ -9,20 +9,19 @@ public class JobController {
     }
 
     /**
-     * Returns the number of jobs near a location with specified language
+     * Returns the percentage of jobs near a location with specified language requirement
+     * @param loc   Location name
+     * @param lang  Language name
      */
-    int getJobCont(String loc, String lang){
-        return 0;
+    double getPercentOfJob(String loc, String lang){
+        int totalJobCount = gitHubJobSvc.getAllJobs(loc).length;
+        if (totalJobCount == 0) {
+            return 0;
+        }
+        int specJobCount = gitHubJobSvc.getAllJobs(loc, lang).length;
+        return specJobCount / totalJobCount * 100.0;
     }
 
 
 
-    /**
-     * Returns all jobs near a location
-     * @param loc
-     * @return
-     */
-    int getJobCount(String loc) {
-        return 0;
-    }
 }
