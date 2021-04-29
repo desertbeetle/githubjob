@@ -1,4 +1,6 @@
-package com.desertbeetle.githubjob;
+package com.desertbeetle.githubjob.control;
+
+import com.desertbeetle.githubjob.svc.GitHubJobSvc;
 
 public class JobController {
 
@@ -13,7 +15,7 @@ public class JobController {
      * @param loc   Location name
      * @param lang  Language name
      */
-    double getPercentOfJob(String loc, String lang){
+    public double getPercentOfJob(String loc, String lang){
         int totalJobCount = gitHubJobSvc.getAllJobs(loc).length;
         if (totalJobCount == 0) {
             return 0;

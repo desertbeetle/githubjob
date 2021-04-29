@@ -1,5 +1,9 @@
 package com.desertbeetle.githubjob;
 
+import com.desertbeetle.githubjob.control.JobController;
+import com.desertbeetle.githubjob.model.Job;
+import com.desertbeetle.githubjob.svc.GitHubJobSvc;
+import com.desertbeetle.githubjob.svc.GitHubJobSvcImpl;
 import org.junit.Test;
 import org.mockito.Mockito;
 

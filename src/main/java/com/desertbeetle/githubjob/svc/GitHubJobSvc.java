@@ -1,4 +1,6 @@
-package com.desertbeetle.githubjob;
+package com.desertbeetle.githubjob.svc;
+
+import com.desertbeetle.githubjob.model.Job;
 
 public interface GitHubJobSvc {
     Job[] getAllJobs();

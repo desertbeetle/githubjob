@@ -1,4 +1,4 @@
-package com.desertbeetle.githubjob;
+package com.desertbeetle.githubjob.client;
 
 public class Main {
 

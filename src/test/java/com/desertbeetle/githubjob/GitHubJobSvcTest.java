@@ -1,12 +1,14 @@
 package com.desertbeetle.githubjob;
 
+import com.desertbeetle.githubjob.model.Job;
+import com.desertbeetle.githubjob.svc.GitHubJobSvc;
+import com.desertbeetle.githubjob.svc.GitHubJobSvcImpl;
 import org.junit.Test;
 import org.mockito.Mock;
 
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 public class GitHubJobSvcTest {
