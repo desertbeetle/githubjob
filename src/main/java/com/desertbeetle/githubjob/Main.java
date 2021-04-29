@@ -4,9 +4,14 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println("Hello Desert Beetle! Welcome to Coding Challenge~!");
-        int a=1, b=1;
-        System.out.println("1+1 is " + Util.add(a,b));
+
+        String[] cities = new String[] {"Boston", "San Francisco", "Log Angeles", "Denver", "Boulder", "Chicago", "New York" ,"Raleigh"};
+        String[] langs = {"Java", "C#", "Python", "Swift", "Objective-C", "Ruby", "Kotlin", "Go", "C++", "Javascript"};
+
+        GitHubJob githubjob = new GitHubJob(cities, langs);
+        githubjob.run();
 
 
     }
+
 }
