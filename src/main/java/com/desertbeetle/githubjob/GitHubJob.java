@@ -17,8 +17,8 @@ public class GitHubJob {
         for (String loc : locations) {
             System.out.println(loc+":");
             for (String lang : languages) {
-                double perc = jobController.getJobCont(loc, lang);
-                    System.out.println("- " + lang + ": " + perc + "%");
+                double percent = jobController.getPercentOfJob(loc, lang);
+                System.out.println("- " + lang + ": " + percent + "%");
             }
         }
     }
