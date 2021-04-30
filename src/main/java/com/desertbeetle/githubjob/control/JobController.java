@@ -63,7 +63,7 @@ public class JobController {
         for (String l : lang) {
             matched = 0;
             for (Job j : jobs) {
-                if (j.descriptionMatchesLang(l)) {
+                if (j.descriptionMatchesKeyword(l)) {
                     matched ++;
                 }
             }

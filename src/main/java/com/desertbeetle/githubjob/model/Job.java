@@ -1,5 +1,7 @@
 package com.desertbeetle.githubjob.model;
 
+import com.desertbeetle.githubjob.util.StringUtil;
+
 /**
  * The model class of each job.
  */
@@ -101,8 +103,8 @@ public class Job {
         this.companyLogoUrl = companyLogoUrl;
     }
 
-    public boolean descriptionMatchesLang(String lang) {
-        return description != null && description.contains(lang);
+    public boolean descriptionMatchesKeyword(String keyword) {
+        return description != null && StringUtil.contains(description, keyword);
     }
 
     @Override
