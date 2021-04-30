@@ -1,10 +1,10 @@
 # GITHUBJOBS
 
-Giving a list of locations and languages, this program calculates the 
-percentage of jobs of each programming language that are open at each location based 
-on the information on GitHub Jobs API (https://jobs.github.com/api).
+This program show the programming language trends across the cities based on the job posting information on GitHub Jobs API (https://jobs.github.com/api).
 
-Sample Output
+This application is written in Java.
+
+Output
 ```
 Boston:
 - Java: 66.67%
@@ -45,7 +45,7 @@ The areas I am most proud of is dividing the program into layers and components 
 ### Area of the code you are least proud of
 Instead of creating new connection on every location/language pair, it may fetch all jobs near a location and do the language filtering locally.   
 
-### Tradeoffs and why
+### Tradeoffs you made and why
 At first, I wanted to use JAX-RS client api to access the REST service endpoint but the library setup didn't quite work. 
 Finally, I switched to use Java URL connection and GSON to do the work and move on. 
 
