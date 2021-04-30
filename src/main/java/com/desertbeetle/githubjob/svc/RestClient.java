@@ -21,6 +21,10 @@ public class RestClient {
     // Public methods
     //
 
+    public Job[] getJobs(String loc) throws  SvcException {
+        return getJobs(loc, null);
+    }
+
     public Job[] getJobs(String loc, String lang) throws SvcException {
         Gson gson = new Gson();
         String s = getJobsInJSONString(loc, lang);

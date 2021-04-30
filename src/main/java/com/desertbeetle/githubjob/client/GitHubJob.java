@@ -1,5 +1,6 @@
 package com.desertbeetle.githubjob.client;
 
+import com.desertbeetle.githubjob.Constants;
 import com.desertbeetle.githubjob.util.TextUtil;
 import com.desertbeetle.githubjob.svc.GitHubJobSvcImpl;
 import com.desertbeetle.githubjob.control.JobController;
@@ -33,18 +34,24 @@ public class GitHubJob {
     //
     // Public method
     //
-    public void run() {
+    public void run() throws SvcException{
 
         for (String loc : locations) {
-            System.out.println(loc+":");
-            for (String lang : languages) {
-                try {
-                    double percent = jobController.getPercentOfJob(loc, lang);
-                    System.out.println("- " + lang + ": " + TextUtil.twoDecimal(percent) + "%");
-                } catch (SvcException e) {
-                    System.out.println("- " + lang + ": " + -1 + "%");
-                }
+            System.out.println(loc + ":");
+            double[] values = jobController.getPercentOfJob(loc, Constants.LANGUAGES);
+            for (int i = 0; i < values.length; i++) {
+                System.out.println("- " + Constants.LANGUAGES[i] + ": " + TextUtil.twoDecimal(values[i]) + "%");
+
             }
         }
+//            for (String lang : languages) {
+//                try {
+//                    double percent = jobController.getPercentOfJob(loc, lang);
+//                    System.out.println("- " + lang + ": " + TextUtil.twoDecimal(percent) + "%");
+//                } catch (SvcException e) {
+//                    System.out.println("- " + lang + ": " + -1 + "%");
+//                }
+//            }
+//        }
     }
 }

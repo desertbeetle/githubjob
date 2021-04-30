@@ -1,8 +1,11 @@
 package com.desertbeetle.githubjob.control;
 
+import com.desertbeetle.githubjob.model.Job;
 import com.desertbeetle.githubjob.util.MathUtil;
 import com.desertbeetle.githubjob.svc.GitHubJobSvc;
 import com.desertbeetle.githubjob.svc.SvcException;
+
+import java.util.ArrayList;
 
 /**
  * The controller class is responsible for calculating the percentage.
@@ -40,6 +43,37 @@ public class JobController {
         double percent = MathUtil.calcPercent(specJobCount, totalJobCount);
 
         return percent;
+    }
+
+    public double[] getPercentOfJob(String loc, String[] lang) throws SvcException {
+        double[] retVal = new double[lang.length];
+
+        int totalJobCount = gitHubJobSvc.getAllJobs(loc).length;
+        if (totalJobCount == 0) {
+            for (int i=0; i < retVal.length; i++) {
+                retVal[i] = 0;
+            }
+            return retVal;
+        }
+
+        Job[] jobs = gitHubJobSvc.getAllJobs(loc);
+        int matched = 0;
+        double percent;
+        int i = 0;
+        for (String l : lang) {
+            matched = 0;
+            for (Job j : jobs) {
+                if (j.descriptionMatchesLang(l)) {
+                    matched ++;
+                }
+            }
+            int total = jobs.length;
+            percent = MathUtil.calcPercent(matched, total);
+//            System.out.println("i: " + i + " matched:" + matched + " total:" + total + " percent:" + percent);
+            retVal [i++] = percent;
+        }
+
+        return retVal;
     }
 
 
