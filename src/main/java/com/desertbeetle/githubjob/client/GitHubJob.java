@@ -1,13 +1,27 @@
 package com.desertbeetle.githubjob.client;
 
+import com.desertbeetle.githubjob.util.TextUtil;
 import com.desertbeetle.githubjob.svc.GitHubJobSvcImpl;
 import com.desertbeetle.githubjob.control.JobController;
+import com.desertbeetle.githubjob.svc.SvcException;
 
+
+/**
+ * The main starting point. Call the run() method to start.
+ */
 public class GitHubJob {
+
+    //
+    // Instance variables
+    //
 
     String[] locations;
     String[] languages;
     JobController jobController;
+
+    //
+    // Constructor
+    //
 
     public GitHubJob(String[] locations, String[] languages) {
         this.locations = locations;
@@ -16,25 +30,21 @@ public class GitHubJob {
         jobController = new JobController(new GitHubJobSvcImpl());
     }
 
+    //
+    // Public method
+    //
     public void run() {
-        String s = getResult();
-        System.out.println(s);
-    }
 
-    /**
-     *
-     * @return
-     */
-    public String getResult() {
-        // public scope for the ease of testing
-        StringBuffer buffer = new StringBuffer();
         for (String loc : locations) {
-            buffer.append(loc+":").append("\n");
+            System.out.println(loc+":");
             for (String lang : languages) {
-                double percent = jobController.getPercentOfJob(loc, lang);
-                buffer.append("- " + lang + ": " + percent + "%").append("\n");
+                try {
+                    double percent = jobController.getPercentOfJob(loc, lang);
+                    System.out.println("- " + lang + ": " + TextUtil.twoDecimal(percent) + "%");
+                } catch (SvcException e) {
+                    System.out.println("- " + lang + ": " + -1 + "%");
+                }
             }
         }
-        return buffer.toString();
     }
 }

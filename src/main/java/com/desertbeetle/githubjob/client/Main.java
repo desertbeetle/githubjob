@@ -1,16 +1,19 @@
 package com.desertbeetle.githubjob.client;
 
+import com.desertbeetle.githubjob.Constants;
+
+/**
+ * The main class.
+ *
+ * Calculate the percentage of jobs of each language at each location.
+ *
+ */
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("Hello Desert Beetle! Welcome to Coding Challenge~!");
-
-        String[] cities = new String[] {"Boston", "San Francisco", "Log Angeles", "Denver", "Boulder", "Chicago", "New York" ,"Raleigh"};
-        String[] langs = {"Java", "C#", "Python", "Swift", "Objective-C", "Ruby", "Kotlin", "Go", "C++", "Javascript"};
-
-        GitHubJob githubjob = new GitHubJob(cities, langs);
+        System.out.println("Hello! Welcome to Coding Challenge!");
+        GitHubJob githubjob = new GitHubJob(Constants.LOCATIONS, Constants.LANGUAGES);
         githubjob.run();
-
 
     }
 

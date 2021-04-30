@@ -4,6 +4,8 @@ import com.desertbeetle.githubjob.control.JobController;
 import com.desertbeetle.githubjob.model.Job;
 import com.desertbeetle.githubjob.svc.GitHubJobSvc;
 import com.desertbeetle.githubjob.svc.GitHubJobSvcImpl;
+import com.desertbeetle.githubjob.svc.SvcException;
+import com.desertbeetle.githubjob.util.MathUtil;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -12,7 +14,7 @@ import static junit.framework.TestCase.assertEquals;
 public class ControllerTest {
 
     @Test
-    public void zeroPercentTest() {
+    public void zeroPercentTest() throws SvcException {
         GitHubJobSvc svc = new GitHubJobSvcImpl();
         GitHubJobSvc spy = Mockito.spy(svc);
         Mockito.doReturn(new Job[0]).when(spy).getAllJobs();
@@ -25,7 +27,7 @@ public class ControllerTest {
         assertEquals(0.0, percentage);
     }
     @Test
-    public void oneHundredPercentTest() {
+    public void oneHundredPercentTest() throws SvcException {
         GitHubJobSvc svc = new GitHubJobSvcImpl();
         GitHubJobSvc spy = Mockito.spy(svc);
         Job[] jobs = new Job[10];
@@ -38,7 +40,7 @@ public class ControllerTest {
     }
 
     @Test
-    public void mixTest() {
+    public void mixTest() throws SvcException {
         GitHubJobSvc svc = new GitHubJobSvcImpl();
         GitHubJobSvc spy = Mockito.spy(svc);
         Job[] jobs = new Job[10];
@@ -59,9 +61,9 @@ public class ControllerTest {
         assertEquals(100.0, controller.getPercentOfJob("loc1", "Java"));
         assertEquals(100.0, controller.getPercentOfJob("loc1", "Kotlin"));
         assertEquals(100.0, controller.getPercentOfJob("loc1", "C#"));
-        assertEquals(3/7*100.0, controller.getPercentOfJob("loc2", "Java"));
-        assertEquals(4/7*100.0, controller.getPercentOfJob("loc2", "Kotlin"));
-        assertEquals(5/7*100.0, controller.getPercentOfJob("loc2", "C#"));
+        assertEquals(MathUtil.calcPercent(3.0,7.0), controller.getPercentOfJob("loc2", "Java"));
+        assertEquals(MathUtil.calcPercent(4.0,7.0), controller.getPercentOfJob("loc2", "Kotlin"));
+        assertEquals(MathUtil.calcPercent(5.0,7.0), controller.getPercentOfJob("loc2", "C#"));
 
 
     }
