@@ -2,6 +2,7 @@ package com.desertbeetle.githubjob.client;
 
 import com.desertbeetle.githubjob.Constants;
 import com.desertbeetle.githubjob.svc.SvcException;
+import com.desertbeetle.githubjob.util.TimeUtil;
 
 /**
  * The main class.
@@ -15,7 +16,17 @@ public class Main {
         System.out.println("Hello! Welcome to Coding Challenge!");
         GitHubJob githubjob = new GitHubJob(Constants.LOCATIONS, Constants.LANGUAGES);
         try {
-            githubjob.run();
+            long start = System.currentTimeMillis();
+            githubjob.runNormal();
+            long end = System.currentTimeMillis();
+            System.out.println("Total time taken: " + TimeUtil.getElaspedTimeInMS(start, end) + " ms");
+
+
+            start = System.currentTimeMillis();
+            githubjob.runImprove();
+            end = System.currentTimeMillis();
+            System.out.println("Total time taken: " + TimeUtil.getElaspedTimeInMS(start, end) + " ms");
+
         } catch (SvcException svc) {
             System.out.println("Ops.. ");
             System.out.println(svc.getMessage());

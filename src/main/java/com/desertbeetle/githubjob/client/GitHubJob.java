@@ -1,10 +1,12 @@
 package com.desertbeetle.githubjob.client;
 
 import com.desertbeetle.githubjob.Constants;
+import com.desertbeetle.githubjob.model.JobsSummary;
 import com.desertbeetle.githubjob.util.TextUtil;
 import com.desertbeetle.githubjob.svc.GitHubJobSvcImpl;
 import com.desertbeetle.githubjob.control.JobController;
 import com.desertbeetle.githubjob.svc.SvcException;
+import com.desertbeetle.githubjob.util.TimeUtil;
 
 
 /**
@@ -34,24 +36,28 @@ public class GitHubJob {
     //
     // Public method
     //
-    public void run() throws SvcException{
+    public void runNormal() throws SvcException{
+        JobsSummary summary = new JobsSummary();
 
         for (String loc : locations) {
-            System.out.println(loc + ":");
-            double[] values = jobController.getPercentOfJob(loc, Constants.LANGUAGES);
-            for (int i = 0; i < values.length; i++) {
-                System.out.println("- " + Constants.LANGUAGES[i] + ": " + TextUtil.twoDecimal(values[i]) + "%");
-
+            System.out.println("Checking jobs near " + loc + "...");
+            for (String lang : languages) {
+                System.out.println("\tChecking " + lang + " job near " + loc);
+                double percent = jobController.getPercentOfJob(loc, lang);
+                summary.add(loc, -1, lang, -1, percent);
             }
         }
-//            for (String lang : languages) {
-//                try {
-//                    double percent = jobController.getPercentOfJob(loc, lang);
-//                    System.out.println("- " + lang + ": " + TextUtil.twoDecimal(percent) + "%");
-//                } catch (SvcException e) {
-//                    System.out.println("- " + lang + ": " + -1 + "%");
-//                }
-//            }
-//        }
+        System.out.println(summary.getConsoleOutput());
+    }
+
+    public void runImprove() throws SvcException {
+        JobsSummary summary = new JobsSummary();
+        for (String loc : locations) {
+            double[] values = jobController.getPercentOfJob(loc, Constants.LANGUAGES);
+            for (int i = 0; i < values.length; i++) {
+                summary.add(loc, -1, Constants.LANGUAGES[i], -1, values[i]);
+            }
+        }
+        System.out.println(summary.getConsoleOutput());
     }
 }
