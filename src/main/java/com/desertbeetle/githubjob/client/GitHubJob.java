@@ -1,12 +1,11 @@
 package com.desertbeetle.githubjob.client;
 
 import com.desertbeetle.githubjob.Constants;
+import com.desertbeetle.githubjob.model.PercentInfo;
 import com.desertbeetle.githubjob.model.JobsSummary;
-import com.desertbeetle.githubjob.util.TextUtil;
 import com.desertbeetle.githubjob.svc.GitHubJobSvcImpl;
 import com.desertbeetle.githubjob.control.JobController;
 import com.desertbeetle.githubjob.svc.SvcException;
-import com.desertbeetle.githubjob.util.TimeUtil;
 
 
 /**
@@ -53,9 +52,9 @@ public class GitHubJob {
     public void runImprove() throws SvcException {
         JobsSummary summary = new JobsSummary();
         for (String loc : locations) {
-            double[] values = jobController.getPercentOfJob(loc, Constants.LANGUAGES);
-            for (int i = 0; i < values.length; i++) {
-                summary.add(loc, -1, Constants.LANGUAGES[i], -1, values[i]);
+            PercentInfo[] percentInfos = jobController.getPercentInfoOfJob(loc, Constants.LANGUAGES);
+            for (int i = 0; i < percentInfos.length; i++) {
+                summary.add(loc, percentInfos[i].getTotal(), Constants.LANGUAGES[i], percentInfos[i].getObtained(), percentInfos[i].getPercent());
             }
         }
         System.out.println(summary.getConsoleOutput());

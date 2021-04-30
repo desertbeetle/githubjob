@@ -45,10 +45,10 @@ public class JobsSummary {
             if (!curr.equals(summary.loc)) {
                 curr = summary.loc;
                 // <Loc>:
-                sb.append(curr).append(":").append("\n");
+                sb.append(curr).append("(").append(summary.jCount).append(")").append(":").append("\n");
             }
             // - <Lang>: <percent>%
-            sb.append("- ").append(summary.keyword).append(": ").append(TextUtil.twoDecimal(summary.percent)).append("%").append("\n");
+            sb.append("- ").append(summary.keyword).append("(").append(summary.matchedCount).append(")").append(": ").append(TextUtil.twoDecimal(summary.percent)).append("%").append("\n");
 
         }
         return sb.toString();
