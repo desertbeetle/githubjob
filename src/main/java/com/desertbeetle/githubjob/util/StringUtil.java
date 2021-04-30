@@ -20,7 +20,8 @@ public class StringUtil {
     }
 
     /**
-     * Default is case insensitive
+     * Returns true if s1 contains s2 (insensitive)
+     *
      * @param s1
      * @param s2
      * @return
