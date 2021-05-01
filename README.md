@@ -54,5 +54,10 @@ It depends on how the program is used. If it is aimed
 for customer, the final data may need to make available in JSON, XML 
 for integration purpose. It is also necessary to add a service endpoint or library for data access.
 
+### Update Summary
+4/30/21 <p>
+Performance improvement. Instead of accessing GitHub Jobs API on every location and language 
+the program can fetch all jobs at each location and match each language in the job description locally. It has shown a big improvement of elapsed time from 18 to 2 seconds. 
+ 
 
 
