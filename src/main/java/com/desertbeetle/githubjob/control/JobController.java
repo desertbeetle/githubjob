@@ -32,16 +32,17 @@ public class JobController {
      * @param loc   Location name
      * @param lang  Language name
      */
-    public double getPercentOfJob(String loc, String lang) throws SvcException {
+    public PercentInfo getPercentOfJob(String loc, String lang) throws SvcException {
 
-        int totalJobCount = gitHubJobSvc.getAllJobs(loc).length;
-        if (totalJobCount == 0) {
-            return 0;
+        int total = gitHubJobSvc.getAllJobs(loc).length;
+        if (total == 0) {
+            return new PercentInfo(0, 0, 0);
         }
-        int specJobCount = gitHubJobSvc.getAllJobs(loc, lang).length;
-        double percent = MathUtil.calcPercent(specJobCount, totalJobCount);
 
-        return percent;
+        int obtained = gitHubJobSvc.getAllJobs(loc, lang).length;
+        double percent = MathUtil.calcPercent(obtained, total);
+
+        return new PercentInfo(obtained, total, percent);
     }
 
 

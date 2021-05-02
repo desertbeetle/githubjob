@@ -16,15 +16,17 @@ public class Main {
         System.out.println("Hello! Welcome to Coding Challenge!");
         GitHubJob githubjob = new GitHubJob(Constants.LOCATIONS, Constants.LANGUAGES);
         try {
-//            long start = System.currentTimeMillis();
-//            githubjob.runNormal();
-//            long end = System.currentTimeMillis();
-//            System.out.println("Total time taken: " + TimeUtil.getElaspedTimeInMS(start, end) + " ms");
+            long start, end;
+
+            start = System.currentTimeMillis();
+            githubjob.runNormal();
+            end = System.currentTimeMillis();
+            System.out.println("Total time taken: " + TimeUtil.getElaspedTimeInMS(start, end) + " ms");
 
 
-            long start = System.currentTimeMillis();
+            start = System.currentTimeMillis();
             githubjob.runImprove();
-            long end = System.currentTimeMillis();
+            end = System.currentTimeMillis();
             System.out.println("Total time taken: " + TimeUtil.getElaspedTimeInMS(start, end) + " ms");
 
         } catch (SvcException svc) {

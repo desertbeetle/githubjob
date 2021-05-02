@@ -42,8 +42,8 @@ public class GitHubJob {
             System.out.println("Checking jobs near " + loc + "...");
             for (String lang : languages) {
                 System.out.println("\tChecking " + lang + " job near " + loc);
-                double percent = jobController.getPercentOfJob(loc, lang);
-                summary.add(loc, -1, lang, -1, percent);
+                PercentInfo info = jobController.getPercentOfJob(loc, lang);
+                summary.add(loc, info.getTotal(), lang, info.getObtained(), info.getPercent());
             }
         }
         System.out.println(summary.getConsoleOutput());

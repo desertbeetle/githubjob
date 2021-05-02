@@ -2,6 +2,7 @@ package com.desertbeetle.githubjob;
 
 import com.desertbeetle.githubjob.control.JobController;
 import com.desertbeetle.githubjob.model.Job;
+import com.desertbeetle.githubjob.model.PercentInfo;
 import com.desertbeetle.githubjob.svc.GitHubJobSvc;
 import com.desertbeetle.githubjob.svc.GitHubJobSvcImpl;
 import com.desertbeetle.githubjob.svc.SvcException;
@@ -23,8 +24,8 @@ public class ControllerTest {
         JobController controller = new JobController(spy);
         String loc = "irrivalent";
         String lang = "irrivalent";
-        double percentage = controller.getPercentOfJob(lang, loc);
-        assertEquals(0.0, percentage);
+        PercentInfo info = controller.getPercentOfJob(lang, loc);
+        assertEquals(0.0, info.getPercent());
     }
     @Test
     public void oneHundredPercentTest() throws SvcException {
@@ -35,8 +36,8 @@ public class ControllerTest {
         Mockito.doReturn(jobs).when(spy).getAllJobs("loc1");
         Mockito.doReturn(jobs).when(spy).getAllJobs("loc1", "Java");
         JobController controller = new JobController(spy);
-        double percentage = controller.getPercentOfJob("loc1", "Java");
-        assertEquals(100.0, percentage);
+        PercentInfo info = controller.getPercentOfJob("loc1", "Java");
+        assertEquals(100.0, info.getPercent());
     }
 
     @Test
